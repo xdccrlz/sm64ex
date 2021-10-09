@@ -1,27 +1,6 @@
 #!/bin/sh
 #
-# apply_patch.sh - Applies an enhancement patch
+# build code with enhanced options
 #
-
-if [ "$#" -ne 1 ]
-then
-    echo "Usage: $0 patch_file"
-    echo '    Applies a patch file to the current directory'
-    exit 1
-fi
-
-read -p "Do you wish to apply the patch '$1'? [Y/N] " response
-case "$response" in
-    Y|y)
-	patch -p1 < "$1"
-	;;
-    N|n)
-	echo 'Quit'
-	exit 1
-	;;
-    *)
-	echo "Invalid response '$response'."
-	exit 1
-	;;
-esac
-
+gmake -j4 OSX_BUILD=1 VERSION=us EXTERNAL_DATA=1 NODRAWDISTANCE=1 BETTERCAMERA=1
+cd build/us_pc && ./sm64.us.f3dex2e
